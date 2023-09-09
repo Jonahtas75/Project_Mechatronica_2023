@@ -17,10 +17,20 @@ int main()
     int hoogte = 0;
     int brugAan = 1;
 
-    void brugChecker()
+    void sensorChecker()
     {
         while(sensorDicht) // Als brug dicht is
         {
+            printf("Boot signaal? 1 of 0: ");
+            scanf("%d",&signaalBoot);
+            if(!signaalBoot)
+            {
+                printf("Dicht\n");
+                break;
+            }
+            printf("Wegverkeer? 1 of 0: ");
+            scanf("%d",&wegverkeer);
+
             // Check voor boten en wegverkeer
             if(signaalBoot && !wegverkeer)
             {
@@ -30,19 +40,15 @@ int main()
             }
 
 
-            printf("dicht\n");
-            sleep(1);
-            printf("Boot signaal?\n");
-            scanf("%d",&signaalBoot);
-            printf("Wegverkeer?\n");
-            scanf("%d",&wegverkeer);
+            printf("Dicht\n");
+
         }
 
         while(motorBrug == 1) // Als brug aan het openen is
         {
             // Stuur motor aan
 
-            printf("openen\n");
+            printf("Aan het openen\n");
             hoogte++;
             sleep(1);
             if(hoogte == 5)
@@ -58,9 +64,8 @@ int main()
         {
             // Check of boot voorbij is
 
-            printf("open\n");
-            sleep(1);
-            printf("Boot signaal?\n");
+            printf("Open\n");
+            printf("Boot signaal? 1 of 0: ");
             scanf("%d",&signaalBoot);
             if(!signaalBoot)
             {
@@ -75,27 +80,23 @@ int main()
         {
             // Stuur motor aan
 
-            printf("sluiten\n");
+            printf("Aan het sluiten\n");
             hoogte--;
             sleep(1);
             if(hoogte == 0)
             {
                 motorBrug = 0;
                 sensorDicht = 1;
+                printf("Dicht\n");
                 break;
             }
         }
     }
 
 //-------------------------------------------------------------------------------------//
-    printf("Boot signaal?\n");
-    scanf("%d",&signaalBoot);
-    printf("Wegverkeer?\n");
-    scanf("%d",&wegverkeer);
-
     while(brugAan)
     {
-       brugChecker();
+       sensorChecker();
     }
 
     return 0;

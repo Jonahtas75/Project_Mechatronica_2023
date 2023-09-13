@@ -17,10 +17,17 @@ int main()
     int hoogte = 0;
     int brugAan = 1;
 
+    int stoplichtBoot = 1;
+    int stoplichtVerkeer = 0;
+        //1 is rood, 0 is groen
+
     void sensorChecker()
     {
         while(sensorDicht) // Als brug dicht is
         {
+            printf("Het stoplicht van de boten is: %d\n" ,stoplichtBoot);
+            printf("Het stoplicht van het verkeer is: %d\n" ,stoplichtVerkeer);
+
             printf("Boot signaal? 1 of 0: ");
             scanf("%d",&signaalBoot);
             if(!signaalBoot)
@@ -28,6 +35,10 @@ int main()
                 printf("Dicht\n");
                 break;
             }
+
+            stoplichtVerkeer = 1;
+            printf("Het stoplicht van het verkeer is: %d\n" ,stoplichtVerkeer);
+
             printf("Wegverkeer? 1 of 0: ");
             scanf("%d",&wegverkeer);
 
@@ -65,6 +76,10 @@ int main()
             // Check of boot voorbij is
 
             printf("Open\n");
+
+            stoplichtBoot = 0;
+            printf("Het stoplicht van de boten is %d\n" ,stoplichtBoot);
+
             printf("Boot signaal? 1 of 0: ");
             scanf("%d",&signaalBoot);
             if(!signaalBoot)
@@ -74,6 +89,12 @@ int main()
                 break;
             }
 
+        }
+
+        if(!signaalBoot)
+        {
+            stoplichtBoot = 1;
+            printf("Het stoplicht van de boten is %d\n" ,stoplichtBoot);
         }
 
         while(motorBrug == -1) // Als brug aan het sluiten is
@@ -91,6 +112,8 @@ int main()
                 break;
             }
         }
+    stoplichtVerkeer = 0;
+    printf("Het stoplicht van het verkeer is %d\n" ,stoplichtVerkeer);
     }
 
 //-------------------------------------------------------------------------------------//
